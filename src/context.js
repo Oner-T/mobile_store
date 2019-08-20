@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { storeProducts, detailProduct } from "./data";
+import { produce } from "immer";
 
 
 const ProductContext = React.createContext();
@@ -8,14 +9,28 @@ const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
     state = {
-        products: storeProducts,
+        products: [],
         detailProduct: detailProduct
     }
+
+
+
     handleDetail = () => {
         console.log('hello from detail')
     }
+
+    componentDidMount() {
+        const tempProducts = produce(storeProducts, draft => {
+            draft[0].inCart = true;
+        });
+        console.log(storeProducts[0].inCart);
+        console.log(tempProducts[0].inCart);
+        this.setState({ products: tempProducts });
+
+    }
     addToCart = () => {
-        console.log('hello from cart')
+
+
     }
     render() {
         return (
