@@ -13,10 +13,15 @@ class ProductProvider extends Component {
         detailProduct: detailProduct
     }
 
+    getItem = (id) => {
+        const product = this.state.products.find(item => item.id === id);
+        return product;
 
+    }
 
-    handleDetail = () => {
-        console.log('hello from detail')
+    handleDetail = (id) => {
+        const product = this.getItem(id);
+        this.setState = ({ detailProduct: product });
     }
 
     componentDidMount() {
@@ -28,9 +33,8 @@ class ProductProvider extends Component {
         this.setState({ products: tempProducts });
 
     }
-    addToCart = () => {
-
-
+    addToCart = (id) => {
+      
     }
     render() {
         return (
